@@ -172,3 +172,10 @@ A basic `authentication` can be set up by using a `.htaccess` file (stored in ea
 
 That's it! **Note that**: 
     - the `limitation` of basic authentication: the web may asks only once for the authentication since the brower caches the username and password, you can test it in `incognito mode`
+
+## Tutorial Sources
+
+- Vim for beginners: https://linuxconfig.org/vim-tutorial
+- Apache on Ubuntu for beginners: https://www.linux.com/audience/devops/apache-ubuntu-linux-beginners/
+- Installing self-signed certificates: https://www.linux.com/learn/creating-self-signed-ssl-certificates-apache-linux
+- Basic Authentication with user groups in Linux: http://httpd.apache.org/docs/2.4/howto/auth.html
