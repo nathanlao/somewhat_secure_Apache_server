@@ -111,3 +111,64 @@ Set up your Apache web server to use `SSL`, so that your site URL is `https://` 
 7. Restart Apache and test
 
         sudo systemctl restart apache2
+
+## Authentication with groups/files in Linux
+Highlights from https://httpd.apache.org/docs/2.4/howto/auth.html
+
+**Goal**: If you have information on your web site that is sensitive or intended for `only a small group of people`, the `authentication` techniques will help you make sure that the people that see those pages are the people that you wanted to see them.
+
+A basic `authentication` can be set up by using a `.htaccess` file (stored in each folder) to override the `defaults` (which is no authentication)
+
+1. we need to have a `server configuration` that `permits` putting `authentication directives` in these files. This is done with the `AllowOverride` directive
+
+        AllowOverride AuthConfig
+
+    - Ensure modules `mod_authn_core` and `mod_authz_core` loaded by the `apache2.conf` configuration file 
+
+        sudo apache2ctl -M
+
+2. create a `password file` for protecting a directory on your server
+
+- **For 1 user only**:
+
+    put the password file(s) in /usr/local/apache2/passwd, this password file should be placed `somewhere not accessible from the web`
+
+    To create the file, type:
+
+        sudo htpasswd -c /usr/local/apache2/passwd/passwords usr1
+    
+    using an `.htaccess` file under the web folder:
+
+        AuthType Basic
+        AuthName "Restricted Files"
+        # (Following line optional)
+        AuthBasicProvider file
+        AuthUserFile "/usr/local/apache2/passwd/passwords"
+        Require user usr1
+
+- **For groups of users**:
+
+    create a `group file` that associates `group names` with a list of `users` in that group
+
+        sudo vim grp1
+
+    Format in grp1
+
+        grp1: usr1 usr2
+
+    To add a user to your `already existing password file`:
+
+        htpasswd /usr/local/apache/passwd/passwords usr2
+
+    modify `.htaccess` file under the web folder:
+
+        AuthType Basic
+        AuthName "By Invitation Only"
+        # Optional line:
+        AuthBasicProvider file
+        AuthUserFile "/usr/local/apache2/passwd/passwords"
+        AuthGroupFile "/usr/local/apache/passwd/grp1"
+        Require group grp1
+
+That's it! **Note that**: 
+    - the `limitation` of basic authentication: the web may asks only once for the authentication since the brower caches the username and password, you can test it in `incognito mode`
