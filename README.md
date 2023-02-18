@@ -1,9 +1,11 @@
 # somewhat_secure_Apache_server
 
-1. Create a `Linux Server` on `Google Cloud Platform` with the following characteristics: **connection using SSH**
-    - A Linux disk image running Ubuntu 20.04 LTS
-    - Allows both HTTP and HTTPS traffic
-    - 2 vCPU with 2 GB of onboard memory 
+**Goals**: Installing a self-signed SSL certificate, and creating groups and permissions for the files 
+
+**Server/Environment**: Create a `Linux Server` on `Google Cloud Platform` with the following characteristics: **connection using SSH**
+- A Linux disk image running Ubuntu 20.04 LTS
+- Allows both HTTP and HTTPS traffic
+- 2 vCPU with 2 GB of onboard memory 
 
 ## Apache server on Ubuntu Linux setup
 Highlights from https://www.linux.com/audience/devops/apache-ubuntu-linux-beginners/
