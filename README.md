@@ -51,6 +51,8 @@ Highlights from https://www.linux.com/training-tutorials/creating-self-signed-ss
 
 Set up your Apache web server to use `SSL`, so that your site URL is `https://` and not `http://`, and connect to the server securely
 
+**Note that**: we will see an `untrusted connection warning` because `cert` is self-signed and the browser doesn’t know your server.
+
 1. Make sure Apache has `SSL` enabled
 
         sudo a2enmod ssl
